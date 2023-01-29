@@ -1,6 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const https = require("https");
+require("dotenv").config();
+
+
 
 const app = express();
 app.use(bodyParser.urlencoded({
@@ -11,7 +14,7 @@ app.use(bodyParser.urlencoded({
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 
 mailchimp.setConfig({
-  apiKey: "26bcf3432eec9b28460869a73751edb3",
+  apiKey: process.env.MAILCHIMP_API_KEY,
   server: "us21",
 });
 
@@ -28,7 +31,7 @@ const firstName = req.body.fName;
 const secondName = req.body.lName;
 const email = req.body.email;
 
-const listId = "1810b076dc";
+const listId = process.env.LIST_ID;
 
 const subscribingUser = {
  firstName: firstName,
